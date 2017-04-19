@@ -1,0 +1,20 @@
+{
+  "root": true,  // declaring as root eslint file, add for safety, should not look at any parent files for configuration
+  "extends": [
+    "eslint:recommended", // recommended rules (could use airbnb, etc.)
+    "plugin:import/errors", // plugin for imports (invalid import statement informed as soon as saved)
+    "plugin:import/warnings"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 7,  // latest standard
+    "sourceType": "module"  // standard js modules
+  },
+  "env": { // declares env that eslint should be aware of & to expect certain global variables
+    "browser": true,
+    "node": true,
+    "mocha": true
+  },
+  "rules": { // rules we want to override
+    "no-console": 1 // 0: off, 1: warning 2: error
+  }
+}
