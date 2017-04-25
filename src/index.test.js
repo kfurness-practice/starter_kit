@@ -13,7 +13,7 @@ describe('Our first test', () => {
 describe('index.html', () => {
   // when we call jsdom, asynchronous call that occurs, SO we have to set up test to be asynchronous
   // when we call it, takes a parameter we call done, that will tell mocha that our test is done, and then it will run the expect and report results AFTER it sees done
-  it('should say hello', (done) => {
+  it('should say Users', (done) => {
     // reference to html file (fs part of node's file system)
     const index = fs.readFileSync('./src/index.html', 'utf-8')
     // use jsdom to define environment, pass index.html
@@ -22,7 +22,7 @@ describe('index.html', () => {
       // target first h1 - window represents window in browser
       // returns an array, just want first one hence the [0]
       const h1 = window.document.getElementsByTagName('h1')[0];
-      expect(h1.innerHTML).to.equal("Hello World!?");
+      expect(h1.innerHTML).to.equal("Users");
       //
       done();
       // close window to free up memory taken
