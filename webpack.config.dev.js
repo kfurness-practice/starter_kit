@@ -1,4 +1,5 @@
 import path from 'path';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 export default {
   debug: true,  // enables debugging info
@@ -14,7 +15,13 @@ export default {
     filename: 'bundle.js'
   }, // where it should create our dev bundle
   // webpack won't actually generate any physical files for dev build. It will serve our build from memory
-  plugins: [], // can enhance webpack power (hot relaoding, linting styles, catching errors, etc)
+  plugins: [
+    // Create HTML file that includes reference to bundled JS.
+    new HtmlWebpackPlugin({
+      template: 'src/index.html',
+      inject: true  // tells webpack to inject any necessary script tags, so do not have to have script tag pointing to bundle.js in index.html file!
+    })
+  ], // can enhance webpack power (hot relaoding, linting styles, catching errors, etc)
   module: {
     loaders: [
       {test: /\.js$/, exclude: /node_modules/, loaders: ['babel']},
