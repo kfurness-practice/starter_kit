@@ -1,22 +1,20 @@
 import express from 'express';
 import open from 'open';
 import path from 'path';
-import webpack from 'webpack';
-import config from '../webpack.config.dev';
+import compression from 'compression';
 
 /* eslint-disable no-console */
 
 const port = 3000;
 const app = express();
-const compiler = webpack(config)
 
-app.use(require('webpack-dev-middleware')(compiler, {
-  noInfo: true,
-  publicPath: config.output.publicPath
-}))
+// This is not for actual production use. This is just useful for hosting the minified production build for local debugging purposes.
+app.use(compression()); // use "g-zip"" compression and express
+
+app.use(express.static('dist'));
 
 app.get('/', function(req, res) {
-  res.sendFile(path.join(__dirname, '../src/index.html'))
+  res.sendFile(path.join(__dirname, '../dist/index.html')) // change to dist
 });
 
 app.get('/users', function (req, res) {
@@ -35,5 +33,3 @@ app.listen(port, function(err) {
     open('http://localhost:' + port);
   }
 });
-
-
